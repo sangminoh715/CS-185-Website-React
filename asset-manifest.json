@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/CS-185-Website-React/static/css/main.d1b05096.chunk.css",
+    "main.js": "/CS-185-Website-React/static/js/main.0efceb62.chunk.js",
+    "main.js.map": "/CS-185-Website-React/static/js/main.0efceb62.chunk.js.map",
+    "runtime-main.js": "/CS-185-Website-React/static/js/runtime-main.3710fd89.js",
+    "runtime-main.js.map": "/CS-185-Website-React/static/js/runtime-main.3710fd89.js.map",
+    "static/js/2.00b809c6.chunk.js": "/CS-185-Website-React/static/js/2.00b809c6.chunk.js",
+    "static/js/2.00b809c6.chunk.js.map": "/CS-185-Website-React/static/js/2.00b809c6.chunk.js.map",
+    "index.html": "/CS-185-Website-React/index.html",
+    "precache-manifest.e171dcdb49d6b890ea983e99f50696dc.js": "/CS-185-Website-React/precache-manifest.e171dcdb49d6b890ea983e99f50696dc.js",
+    "service-worker.js": "/CS-185-Website-React/service-worker.js",
+    "static/css/main.d1b05096.chunk.css.map": "/CS-185-Website-React/static/css/main.d1b05096.chunk.css.map",
+    "static/js/2.00b809c6.chunk.js.LICENSE.txt": "/CS-185-Website-React/static/js/2.00b809c6.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3710fd89.js",
+    "static/js/2.00b809c6.chunk.js",
+    "static/css/main.d1b05096.chunk.css",
+    "static/js/main.0efceb62.chunk.js"
+  ]
+}
