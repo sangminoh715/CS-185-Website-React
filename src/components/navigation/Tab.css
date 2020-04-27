@@ -1,7 +1,7 @@
 .tab {
   display: inline-block;
 
-  font-size: 0.875 rem;
+  font-size: 0.875rem !important;
   text-align: center;
   text-decoration: none;
 

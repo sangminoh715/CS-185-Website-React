@@ -15,14 +15,14 @@ export class Tab extends Component {
     if(this.props.tab.id === this.props.activeTab) {
       return {
         backgroundColor: "#23272B",
-        border: "1px solid black",
+        border: "1px solid #23272B",
         cursor: this.state.cursor
       };
     } else {
       return (
         this.state.isHovering ? ({
-          backgroundColor: "#31313B",
-          border: "1px solid black",
+          backgroundColor: "#32323B",
+          border: "1px solid #32323B",
           cursor: this.state.cursor
         }) : ({
           backgroundColor: "#343A40",

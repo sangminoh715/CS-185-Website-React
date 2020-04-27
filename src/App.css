@@ -1,3 +1,7 @@
+.mainBody {
+  position: relative;
+}
+
 /*
  * A temporary way to stop scrolling when viewing the enlarged content
  */

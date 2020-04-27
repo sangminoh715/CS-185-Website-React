@@ -11,7 +11,7 @@ export class Video extends Component {
         </div>
 
         <div className="video">
-          <iframe className="videoLink" src={this.props.videoContent.link} frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" title={this.props.videoContent.title}/>
+          <iframe className="videoLink" src={this.props.videoContent.link} frameBorder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowFullScreen="" title={this.props.videoContent.title}/>
         </div>
       </div>
     );

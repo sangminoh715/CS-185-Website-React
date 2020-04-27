@@ -6,7 +6,7 @@ export class Project extends Component {
       <div className="project">
         <div className="projectLink">
           <a href={this.props.project.link}>
-            <img class="logo" src={this.props.project.image} alt={this.props.project.projectName + " Logo"}/>
+            <img className="logo" src={this.props.project.image} alt={this.props.project.projectName + " Logo"}/>
           </a>
         </div>
 

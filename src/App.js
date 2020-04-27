@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import ContentContainer from "./components/content/ContentContainer";
 import EnlargedViewer from "./components/content/EnlargedViewer";
 import NavBar from "./components/navigation/NavBar";
+import ToTopButton from "./components/navigation/ToTopButton";
 
 import "./App.css"
 
@@ -13,7 +14,9 @@ export class App extends Component {
       activeTab: 0,
 
       usingLargeViewer: false,
-      imageToEnlarge: -1
+      imageToEnlarge: -1,
+
+      toTopButtonVisible: false
     }
 
     this.changeActiveTab = (id) => {
@@ -36,6 +39,30 @@ export class App extends Component {
         usingLargeViewer: false,
         imageToEnlarge: -1
       });
+    };
+
+    this.showToTopButton = () => {
+      this.setState({
+        toTopButtonVisible: true
+      });
+    };
+
+    this.hideToTopButton = (shouldScrollToTop) => {
+      if(shouldScrollToTop) {
+        document.body.scrollIntoView({block: "start", behavior: "smooth"});
+      }
+
+      this.setState({
+        toTopButtonVisible: false
+      });
+    }
+  }
+
+  handleScroll = (event) => {
+    if(event.target.scrollingElement.scrollTop > (event.srcElement.body.clientHeight / 3)) {
+      this.showToTopButton();
+    } else {
+      this.hideToTopButton(false);
     }
   }
 
@@ -54,8 +81,15 @@ export class App extends Component {
       largeViewer = <div></div>;
     }
 
+    var toTopButton;
+    if(this.state.toTopButtonVisible) {
+      toTopButton = <ToTopButton scrollToTop={this.hideToTopButton}/>;
+    } else {
+      toTopButton = <div></div>;
+    }
+
     return (
-      <div className="body">
+      <div className="mainBody">
         <div className="navBar">
           <NavBar tabs={tabs} activeTab={this.state.activeTab} changeActiveTab={this.changeActiveTab}/>
         </div>
@@ -65,8 +99,18 @@ export class App extends Component {
         </div>
 
         {largeViewer}
+
+        {toTopButton}
       </div>
     );
+  }
+
+  componentDidMount() {
+    window.addEventListener("scroll", this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
   }
 }
 
