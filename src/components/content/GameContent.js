@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import {getPicture} from "../../images/pictures/Pictures";
+
 export class GameContent extends Component {
   render() {
     return (
@@ -21,8 +23,8 @@ export class GameContent extends Component {
 
         <div className="screenshots">
           {
-            this.props.gameInfo.images.map((image) => (
-              <img className="screenshot" src={image} alt=""/>
+            this.props.gameInfo.imageIds.map((imageId) => (
+              <img className="screenshot" src={getPicture(imageId)} alt="" onClick={this.props.useLargeViewer.bind(this, imageId)}/>
             ))
           }
         </div>

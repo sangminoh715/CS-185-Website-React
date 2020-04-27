@@ -1,0 +1,23 @@
+.viewer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background-color: #111111E6; /* A = 0xE6 => ~ 90% opacity */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999; /* Make sure the viewer is above other page elements */
+}
+
+.enlargedImage {
+  width: 90%;
+  max-width: 1200px;
+  height: auto;
+
+  z-index: 10000; /* Make sure the enlarged image is the top-most element */
+}

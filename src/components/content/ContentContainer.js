@@ -16,7 +16,7 @@ export class ContentContainer extends Component {
       case 1:
         return <Projects/>;
       case 2:
-        return <Pictures/>;
+        return <Pictures useLargeViewer={this.props.useLargeViewer}/>;
       case 3:
         return <Videos/>;
     }
