@@ -1,0 +1,21 @@
+.pageContent {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.picture {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  padding: 0 10px;
+}
+
+.aboutMe {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  
+  margin: auto 0;
+  padding: 15px;
+}
