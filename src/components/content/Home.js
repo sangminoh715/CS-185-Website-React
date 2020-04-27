@@ -3,12 +3,12 @@ import React, {Component} from 'react';
 import PageHeader from "./PageHeader";
 
 import "./Home.css";
-import picture from "../../images/sangminoh.png";
+import picture from "../../images/home/sangminoh.png";
 
 export class Home extends Component {
   render() {
-    const title="Welcome to My Portfolio";
-    const description="";
+    const title = "Welcome to My Portfolio";
+    const description = "";
 
     return (
       <div>
