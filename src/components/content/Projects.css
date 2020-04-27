@@ -1,0 +1,48 @@
+.projectsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+.project {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+@media only screen and (max-width: 480px) {
+  .project {
+    flex-direction: column-reverse;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .project {
+    flex-direction: row;
+  }
+  
+  .description {
+    padding: 15px;
+  }
+}
+
+.projectLink {
+  align-self: center;
+}
+
+.logo {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  border: 1px solid black;
+}
+
+.description {
+  width: 100%;
+  max-width: 250px;
+  margin-top: auto;
+  margin-bottom: auto;
+  align-self: center;
+}

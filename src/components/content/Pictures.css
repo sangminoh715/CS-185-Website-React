@@ -1,0 +1,45 @@
+.picturesContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.gameContent {
+  margin-bottom: 30px;
+}
+
+.quote {
+  max-width: 500px;
+  margin: 0 auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.quote > div > p {
+  font-style: italic;
+  color: #545454;
+}
+
+.quote > div > .text {
+  text-align: justify;
+}
+
+.quote > div > .character {
+  text-align: right;
+}
+
+.screenshots {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.screenshots > .screenshot {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  padding: 10px;
+}
+
+.last {
+  margin-bottom: 10px;
+}

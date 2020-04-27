@@ -1,0 +1,16 @@
+.tab {
+  display: inline-block;
+
+  font-size: 0.875rem !important;
+  text-align: center;
+  text-decoration: none;
+
+  padding: 0.25rem 0.5rem;
+  margin-left: 2px;
+  margin-right: 2px;
+
+  color: #F0F0F0;
+  background-color: #343A40;
+  border: 1px solid #343A40;
+  border-radius: 0.2rem;
+}

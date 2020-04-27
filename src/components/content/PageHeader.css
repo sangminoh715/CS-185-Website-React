@@ -1,0 +1,13 @@
+.pageTitle {
+  padding: 20px 0;
+}
+
+.pageDescription {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 5px 10px 0px 10px;
+}
+
+.pageDescription > div > p {
+  text-align: center;
+}
