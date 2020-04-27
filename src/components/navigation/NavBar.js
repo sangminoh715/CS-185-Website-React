@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 
 import Tab from "./Tab";
 
+import "./NavBar.css";
+
 export class NavBar extends Component {
   render() {
     return this.props.tabs.map((tab) => (

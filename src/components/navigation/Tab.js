@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import "./Tab.css";
+
 export class Tab extends Component {
   constructor() {
     super();

@@ -1,0 +1,8 @@
+.contentContainer {
+  position: absolute;
+  top: 35px;
+  left: 0;
+
+  width: 100%;
+  height: auto;
+}

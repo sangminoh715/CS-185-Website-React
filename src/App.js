@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
-import Content from './components/Content'
-import NavBar from './components/NavBar'
+import ContentContainer from './components/content/ContentContainer'
+import NavBar from './components/navigation/NavBar'
 
 import "./App.css"
 
@@ -32,8 +32,8 @@ export class App extends Component {
           <NavBar tabs={tabs} activeTab={this.state.activeTab} changeActiveTab={this.changeActiveTab}/>
         </div>
 
-        <div className="content">
-          <Content/>
+        <div className="contentContainer">
+          <ContentContainer activeTab={this.state.activeTab}/>
         </div>
       </div>
     );
