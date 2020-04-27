@@ -6,7 +6,8 @@ export class Tab extends Component {
   constructor() {
     super();
     this.state = {
-      isHovering: false
+      isHovering: false,
+      cursor: "default"
     };
   }
 
@@ -14,28 +15,34 @@ export class Tab extends Component {
     if(this.props.tab.id === this.props.activeTab) {
       return {
         backgroundColor: "#23272B",
-        border: "1px solid black"
+        border: "1px solid black",
+        cursor: this.state.cursor
       };
     } else {
-      return (this.state.isHovering ? ({
+      return (
+        this.state.isHovering ? ({
           backgroundColor: "#31313B",
-          border: "1px solid black"
+          border: "1px solid black",
+          cursor: this.state.cursor
         }) : ({
           backgroundColor: "#343A40",
-          border: "1px solid #343A40"
+          border: "1px solid #343A40",
+          cursor: this.state.cursor
         }));
     }
   };
 
   mouseEnter = () => {
     this.setState({
-      isHovering: true
+      isHovering: true,
+      cursor: "pointer"
     });
   }
 
   mouseLeave = () => {
     this.setState({
-      isHovering: false
+      isHovering: false,
+      cursor: "default"
     });
   }
 
