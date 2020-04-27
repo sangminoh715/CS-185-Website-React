@@ -1,22 +1,36 @@
 {
   "files": {
-    "main.css": "/CS-185-Website-React/static/css/main.d1b05096.chunk.css",
-    "main.js": "/CS-185-Website-React/static/js/main.0efceb62.chunk.js",
-    "main.js.map": "/CS-185-Website-React/static/js/main.0efceb62.chunk.js.map",
+    "main.css": "/CS-185-Website-React/static/css/main.875b55ff.chunk.css",
+    "main.js": "/CS-185-Website-React/static/js/main.d52b5088.chunk.js",
+    "main.js.map": "/CS-185-Website-React/static/js/main.d52b5088.chunk.js.map",
     "runtime-main.js": "/CS-185-Website-React/static/js/runtime-main.3710fd89.js",
     "runtime-main.js.map": "/CS-185-Website-React/static/js/runtime-main.3710fd89.js.map",
-    "static/js/2.00b809c6.chunk.js": "/CS-185-Website-React/static/js/2.00b809c6.chunk.js",
-    "static/js/2.00b809c6.chunk.js.map": "/CS-185-Website-React/static/js/2.00b809c6.chunk.js.map",
+    "static/js/2.c3b0a229.chunk.js": "/CS-185-Website-React/static/js/2.c3b0a229.chunk.js",
+    "static/js/2.c3b0a229.chunk.js.map": "/CS-185-Website-React/static/js/2.c3b0a229.chunk.js.map",
     "index.html": "/CS-185-Website-React/index.html",
-    "precache-manifest.e171dcdb49d6b890ea983e99f50696dc.js": "/CS-185-Website-React/precache-manifest.e171dcdb49d6b890ea983e99f50696dc.js",
+    "precache-manifest.7226644537495e9a75c3575266f04544.js": "/CS-185-Website-React/precache-manifest.7226644537495e9a75c3575266f04544.js",
     "service-worker.js": "/CS-185-Website-React/service-worker.js",
-    "static/css/main.d1b05096.chunk.css.map": "/CS-185-Website-React/static/css/main.d1b05096.chunk.css.map",
-    "static/js/2.00b809c6.chunk.js.LICENSE.txt": "/CS-185-Website-React/static/js/2.00b809c6.chunk.js.LICENSE.txt"
+    "static/css/main.875b55ff.chunk.css.map": "/CS-185-Website-React/static/css/main.875b55ff.chunk.css.map",
+    "static/js/2.c3b0a229.chunk.js.LICENSE.txt": "/CS-185-Website-React/static/js/2.c3b0a229.chunk.js.LICENSE.txt",
+    "static/media/act_logo.png": "/CS-185-Website-React/static/media/act_logo.6d14a57c.png",
+    "static/media/celeste1.jpg": "/CS-185-Website-React/static/media/celeste1.c670a56a.jpg",
+    "static/media/celeste2.jpg": "/CS-185-Website-React/static/media/celeste2.f8cd65e5.jpg",
+    "static/media/celeste3.png": "/CS-185-Website-React/static/media/celeste3.7ff43e28.png",
+    "static/media/celeste4.png": "/CS-185-Website-React/static/media/celeste4.c63df00f.png",
+    "static/media/eternal_flight_logo.png": "/CS-185-Website-React/static/media/eternal_flight_logo.06f6183d.png",
+    "static/media/hollowknight1.jpg": "/CS-185-Website-React/static/media/hollowknight1.28a20ea8.jpg",
+    "static/media/hollowknight2.jpg": "/CS-185-Website-React/static/media/hollowknight2.09a62fc8.jpg",
+    "static/media/hollowknight3.jpg": "/CS-185-Website-React/static/media/hollowknight3.ca1804f9.jpg",
+    "static/media/ori1.jpg": "/CS-185-Website-React/static/media/ori1.120e72d4.jpg",
+    "static/media/ori2.jpg": "/CS-185-Website-React/static/media/ori2.42accfa8.jpg",
+    "static/media/ori3.jpg": "/CS-185-Website-React/static/media/ori3.298727cc.jpg",
+    "static/media/ori4.jpg": "/CS-185-Website-React/static/media/ori4.a18c6ce8.jpg",
+    "static/media/sangminoh.png": "/CS-185-Website-React/static/media/sangminoh.b26cebd4.png"
   },
   "entrypoints": [
     "static/js/runtime-main.3710fd89.js",
-    "static/js/2.00b809c6.chunk.js",
-    "static/css/main.d1b05096.chunk.css",
-    "static/js/main.0efceb62.chunk.js"
+    "static/js/2.c3b0a229.chunk.js",
+    "static/css/main.875b55ff.chunk.css",
+    "static/js/main.d52b5088.chunk.js"
   ]
 }
