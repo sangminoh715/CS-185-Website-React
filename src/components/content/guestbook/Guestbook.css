@@ -9,8 +9,10 @@
 .guestbookForm {
   width: 30vw;
   height: 70vh;
+
   margin: 10px;
   margin-right: 5px;
+  padding: 10px;
 
   border-radius: 0.2rem;
 
@@ -20,8 +22,11 @@
 .guestbookMessages {
   width: 40vw;
   height: 70vh;
+  overflow-y: auto;
+
   margin: 10px;
   margin-left: 5px;
+  padding: 10px;
 
   border-radius: 0.2rem;
 

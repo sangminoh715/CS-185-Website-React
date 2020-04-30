@@ -56,7 +56,7 @@ export class Form extends Component {
 
   render() {
     return (
-      <div className="formFields">
+      <div>
         <p>
           * <i>Indicates a required field</i>
           <br/>

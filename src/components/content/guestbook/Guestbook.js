@@ -13,15 +13,19 @@ export class Guestbook extends Component {
   constructor() {
     super();
 
-    this.state = {};
+    this.state = {
+      messages: []
+    };
 
     this.addToGuestbook = (filledForm) => {
       Firebase.database().ref("data").push().set(filledForm);
     };
   }
 
-  getMessages = () => {
-    return "f";
+  createCardForMessage = (message) => {
+    return (
+      <div>{message.date}</div>
+    );
   }
 
   render() {
@@ -36,7 +40,11 @@ export class Guestbook extends Component {
             <Form addToGuestbook={this.addToGuestbook}/>
           </div>
           <div className="guestbookMessages">
-            {this.getMessages()}
+            {
+              this.state.messages.map((message) => {
+                return this.createCardForMessage(message);
+              })
+            }
           </div>
         </div>
       </div>
@@ -47,6 +55,13 @@ export class Guestbook extends Component {
     if(!Firebase.apps.length) {
       Firebase.initializeApp(FirebaseConfig);
     }
+
+    Firebase.database().ref("data").on("value", (snapshot) => {
+      const receivedValue = snapshot.val();
+      this.setState({
+        messages: Object.values(receivedValue)
+      });
+    });
   }
 }
 
