@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {getPicture} from "../../images/pictures/Pictures";
+import {getPicture} from "../../../images/pictures/Pictures";
 
 export class GameContent extends Component {
   render() {

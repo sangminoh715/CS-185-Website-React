@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
 
-import Home from "./Home";
-import Pictures from "./Pictures";
-import Projects from "./Projects";
-import Videos from "./Videos";
+import Home from "./home/Home";
+import Guestbook from "./guestbook/Guestbook";
+import Pictures from "./pictures/Pictures";
+import Projects from "./projects/Projects";
+import Videos from "./videos/Videos";
 
 import "./ContentContainer.css";
 
 export class ContentContainer extends Component {
   displayContent = () => {
     switch(this.props.activeTab) {
-      default:
+      default:  
       case 0:
         return <Home/>;
       case 1:
@@ -19,6 +20,8 @@ export class ContentContainer extends Component {
         return <Pictures useLargeViewer={this.props.useLargeViewer}/>;
       case 3:
         return <Videos/>;
+      case 4:
+        return <Guestbook/>;
     }
   };
 

@@ -1,0 +1,57 @@
+.formField {
+  display: block;
+  overflow: visible;
+
+  font-size: 1rem;
+
+  width: calc(30vw - 20px);
+
+  margin-bottom: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  border: 1px solid #CED4DA;
+  border-radius: 0.3rem;
+}
+
+.formField:focus {
+  border: 1px solid #80BDFF;
+}
+
+.formButton {
+  display: inline-block;
+
+  font-size: 1rem;
+  text-align: center;
+  vertical-align: center;
+
+  width: max(7.5vw, 50px);
+
+  margin-right: 5px;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.2rem;
+
+  color: #F0F0F0;
+}
+
+.formButton:hover {
+  cursor: pointer;
+}
+
+.submitButton {
+  background-color: #007BFF;
+  border: 1px solid #007BFF;
+}
+
+.submitButton:hover {
+  background-color: #0066FF;
+  border: 1px solid #0066FF;
+}
+
+.resetButton {
+  background-color: #6C757D;
+  border: 1px solid #6C757D;
+}
+
+.resetButton:hover {
+  background-color: #656E75;
+  border: 1px solid #656E75;
+}

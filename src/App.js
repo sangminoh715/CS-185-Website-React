@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import ContentContainer from "./components/content/ContentContainer";
-import EnlargedViewer from "./components/content/EnlargedViewer";
+import EnlargedViewer from "./components/content/pictures/EnlargedViewer";
 import NavBar from "./components/navigation/NavBar";
 import ToTopButton from "./components/navigation/ToTopButton";
 
@@ -11,7 +11,7 @@ export class App extends Component {
   constructor() {
     super();
     this.state = {
-      activeTab: 0,
+      activeTab: 4,
 
       usingLargeViewer: false,
       imageToEnlarge: -1,
@@ -71,7 +71,8 @@ export class App extends Component {
       {id: 0, title: "Home"},
       {id: 1, title: "Projects"},
       {id: 2, title: "Pictures"},
-      {id: 3, title: "Videos"}
+      {id: 3, title: "Videos"},
+      {id: 4, title: "Guestbook"}
     ];
 
     var largeViewer;

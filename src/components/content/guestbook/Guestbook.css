@@ -1,0 +1,42 @@
+.guestbookContainer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+.guestbookForm {
+  width: 30vw;
+  height: 70vh;
+
+  margin: 10px;
+  margin-right: 5px;
+  padding: 10px;
+
+  border-radius: 0.2rem;
+
+  background-color: #EBECED;
+
+  overflow-y: auto;
+}
+
+.guestbookMessages {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+
+  width: 40vw;
+  height: 70vh;
+
+  margin: 10px;
+  margin-left: 5px;
+  padding: 10px;
+
+  border-radius: 0.2rem;
+
+  background-color: #D5D8DB;
+
+  overflow-y: auto;
+}

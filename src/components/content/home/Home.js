@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 
-import PageHeader from "./PageHeader";
+import PageHeader from "../PageHeader";
 
 import "./Home.css";
-import picture from "../../images/home/sangminoh.png";
+import picture from "../../../images/home/sangminoh.png";
 
 export class Home extends Component {
   render() {
