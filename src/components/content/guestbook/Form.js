@@ -23,6 +23,7 @@ export class Form extends Component {
 
   onReset = (event) => {
     event.preventDefault();
+
     this.setState({
       name: "",
       bio: "",
@@ -36,7 +37,7 @@ export class Form extends Component {
     event.preventDefault();
 
     if(this.state.name.length === 0) {
-      alert("[Error] Name is required field");
+      alert("[Error] Name is a required field");
     } else if(this.state.name.length < 6) {
       alert("[Error] Name must be greater than 5 characters");
     } else if(this.state.message.length === 0) {
@@ -44,7 +45,12 @@ export class Form extends Component {
     } else if(this.state.message.length < 16) {
       alert("[Error] Message must be greater than 15 characters");
     } else {
-      
+      const formToSubmit = this.state;
+      const currentDate = new Date();
+      formToSubmit["date"] = currentDate.toLocaleString();
+      this.props.addToGuestbook(formToSubmit);
+
+      alert("[Success] Your form was received");
     }
   }
 

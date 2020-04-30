@@ -13,12 +13,10 @@ export class Guestbook extends Component {
   constructor() {
     super();
 
-    this.state = {
+    this.state = {};
 
-    };
-
-    this.addToGuestbook = (message) => {
-
+    this.addToGuestbook = (filledForm) => {
+      Firebase.database().ref("data").push().set(filledForm);
     };
   }
 
@@ -35,7 +33,7 @@ export class Guestbook extends Component {
         <PageHeader tabTitle={title} tabDescription={description}/>
         <div className="guestbookContainer">
           <div className="guestbookForm">
-            <Form onSubmit={this.addToGuestbook}/>
+            <Form addToGuestbook={this.addToGuestbook}/>
           </div>
           <div className="guestbookMessages">
             {this.getMessages()}
