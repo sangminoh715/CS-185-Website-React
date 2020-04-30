@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/CS-185-Website-React/static/css/main.875b55ff.chunk.css",
-    "main.js": "/CS-185-Website-React/static/js/main.d52b5088.chunk.js",
-    "main.js.map": "/CS-185-Website-React/static/js/main.d52b5088.chunk.js.map",
+    "main.css": "/CS-185-Website-React/static/css/main.638bb7f4.chunk.css",
+    "main.js": "/CS-185-Website-React/static/js/main.406d9895.chunk.js",
+    "main.js.map": "/CS-185-Website-React/static/js/main.406d9895.chunk.js.map",
     "runtime-main.js": "/CS-185-Website-React/static/js/runtime-main.3710fd89.js",
     "runtime-main.js.map": "/CS-185-Website-React/static/js/runtime-main.3710fd89.js.map",
-    "static/js/2.c3b0a229.chunk.js": "/CS-185-Website-React/static/js/2.c3b0a229.chunk.js",
-    "static/js/2.c3b0a229.chunk.js.map": "/CS-185-Website-React/static/js/2.c3b0a229.chunk.js.map",
+    "static/js/2.29cf9d6f.chunk.js": "/CS-185-Website-React/static/js/2.29cf9d6f.chunk.js",
+    "static/js/2.29cf9d6f.chunk.js.map": "/CS-185-Website-React/static/js/2.29cf9d6f.chunk.js.map",
     "index.html": "/CS-185-Website-React/index.html",
-    "precache-manifest.7226644537495e9a75c3575266f04544.js": "/CS-185-Website-React/precache-manifest.7226644537495e9a75c3575266f04544.js",
+    "precache-manifest.436dd43ae4b19937435619e22874d12a.js": "/CS-185-Website-React/precache-manifest.436dd43ae4b19937435619e22874d12a.js",
     "service-worker.js": "/CS-185-Website-React/service-worker.js",
-    "static/css/main.875b55ff.chunk.css.map": "/CS-185-Website-React/static/css/main.875b55ff.chunk.css.map",
-    "static/js/2.c3b0a229.chunk.js.LICENSE.txt": "/CS-185-Website-React/static/js/2.c3b0a229.chunk.js.LICENSE.txt",
+    "static/css/main.638bb7f4.chunk.css.map": "/CS-185-Website-React/static/css/main.638bb7f4.chunk.css.map",
+    "static/js/2.29cf9d6f.chunk.js.LICENSE.txt": "/CS-185-Website-React/static/js/2.29cf9d6f.chunk.js.LICENSE.txt",
     "static/media/act_logo.png": "/CS-185-Website-React/static/media/act_logo.6d14a57c.png",
     "static/media/celeste1.jpg": "/CS-185-Website-React/static/media/celeste1.c670a56a.jpg",
     "static/media/celeste2.jpg": "/CS-185-Website-React/static/media/celeste2.f8cd65e5.jpg",
@@ -29,8 +29,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.3710fd89.js",
-    "static/js/2.c3b0a229.chunk.js",
-    "static/css/main.875b55ff.chunk.css",
-    "static/js/main.d52b5088.chunk.js"
+    "static/js/2.29cf9d6f.chunk.js",
+    "static/css/main.638bb7f4.chunk.css",
+    "static/js/main.406d9895.chunk.js"
   ]
 }
