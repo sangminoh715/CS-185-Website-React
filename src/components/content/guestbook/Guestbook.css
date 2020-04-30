@@ -20,6 +20,11 @@
 }
 
 .guestbookMessages {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+
   width: 40vw;
   height: 70vh;
   overflow-y: auto;

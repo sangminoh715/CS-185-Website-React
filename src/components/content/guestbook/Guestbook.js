@@ -23,9 +23,13 @@ export class Guestbook extends Component {
   }
 
   createCardForMessage = (message) => {
-    return (
-      <div>{message.date}</div>
-    );
+    if(message.visibility === "Public") {
+      return (
+        <MessageCard message={message}/>
+      );
+    } else {
+      return;
+    }
   }
 
   render() {
@@ -59,7 +63,7 @@ export class Guestbook extends Component {
     Firebase.database().ref("data").on("value", (snapshot) => {
       const receivedValue = snapshot.val();
       this.setState({
-        messages: Object.values(receivedValue)
+        messages: Object.values(receivedValue).reverse()
       });
     });
   }
