@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import PageHeader from "./PageHeader";
+import PageHeader from "../PageHeader";
 import Video from "./Video";
 
 import "./Videos.css";

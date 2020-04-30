@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import GameContent from "./GameContent";
-import PageHeader from "./PageHeader";
+import PageHeader from "../PageHeader";
 
 import "./Pictures.css";
 

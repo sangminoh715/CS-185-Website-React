@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 
-import PageHeader from "./PageHeader";
+import PageHeader from "../PageHeader";
 import Project from "./Project";
 
 import "./Projects.css";
-import projectImage0 from "../../images/projects/eternal_flight_logo.png";
-import projectImage1 from "../../images/projects/act_logo.png";
+import projectImage0 from "../../../images/projects/eternal_flight_logo.png";
+import projectImage1 from "../../../images/projects/act_logo.png";
 
 export class Projects extends Component {
   render() {
