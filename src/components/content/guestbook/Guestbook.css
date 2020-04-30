@@ -17,6 +17,8 @@
   border-radius: 0.2rem;
 
   background-color: #EBECED;
+
+  overflow-y: auto;
 }
 
 .guestbookMessages {
@@ -27,7 +29,6 @@
 
   width: 40vw;
   height: 70vh;
-  overflow-y: auto;
 
   margin: 10px;
   margin-left: 5px;
@@ -36,4 +37,6 @@
   border-radius: 0.2rem;
 
   background-color: #D5D8DB;
+
+  overflow-y: auto;
 }
