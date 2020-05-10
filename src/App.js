@@ -11,7 +11,7 @@ export class App extends Component {
   constructor() {
     super();
     this.state = {
-      activeTab: 0,
+      activeTab: 5,
 
       usingLargeViewer: false,
       imageToEnlarge: -1,
@@ -72,7 +72,8 @@ export class App extends Component {
       {id: 1, title: "Projects"},
       {id: 2, title: "Pictures"},
       {id: 3, title: "Videos"},
-      {id: 4, title: "Guestbook"}
+      {id: 4, title: "Guestbook"},
+      {id: 5, title: "Movie List"}
     ];
 
     var largeViewer;
