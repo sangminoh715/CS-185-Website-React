@@ -37,7 +37,11 @@
   width: 100%;
   max-width: 600px;
   height: auto;
-  padding: 10px;
+  margin: 10px;
+}
+
+.screenshots > .screenshot:hover {
+  cursor: pointer;
 }
 
 .last {
