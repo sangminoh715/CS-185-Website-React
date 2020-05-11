@@ -24,3 +24,7 @@
     z-index: 5000;
   }
 }
+
+.toTopButton:hover {
+  cursor: pointer;
+}

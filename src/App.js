@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import ContentContainer from "./components/content/ContentContainer";
 import EnlargedViewer from "./components/content/pictures/EnlargedViewer";
+import MovieLightBox from "./components/content/movies/MovieLightBox";
 import NavBar from "./components/navigation/NavBar";
 import ToTopButton from "./components/navigation/ToTopButton";
 
@@ -15,6 +16,9 @@ export class App extends Component {
 
       usingLargeViewer: false,
       imageToEnlarge: -1,
+
+      usingVideoLightBox: false,
+      movieInformation: {},
 
       toTopButtonVisible: false
     }
@@ -41,6 +45,22 @@ export class App extends Component {
       });
     };
 
+    this.showMovieLightBox = (clickedMovieInformation) => {
+      document.body.classList.add("fixedView");
+      this.setState({
+        usingMovieLightBox: true,
+        movieInformation: clickedMovieInformation
+      });
+    };
+
+    this.exitMovieLightBox = () => {
+      document.body.classList.remove("fixedView");
+      this.setState({
+        usingMovieLightBox: false,
+        movieInformation: {}
+      });
+    }
+
     this.showToTopButton = () => {
       this.setState({
         toTopButtonVisible: true
@@ -58,6 +78,24 @@ export class App extends Component {
     }
   }
 
+  getEnlargedViewer = () => {
+    if(this.state.usingLargeViewer) {
+      return <EnlargedViewer imageId={this.state.imageToEnlarge} exitLargeViewer={this.exitLargeViewer}/>;
+    }
+  }
+
+  getMovieLightBox = () => {
+    if(this.state.usingMovieLightBox) {
+      return <MovieLightBox movieInformation={this.state.movieInformation} exitLightBox={this.exitMovieLightBox}/>;
+    }
+  }
+
+  getToTopButton = () => {
+    if(this.state.toTopButtonVisible) {
+      return <ToTopButton scrollToTop={this.hideToTopButton}/>;
+    }
+  }
+
   handleScroll = (event) => {
     if(event.target.scrollingElement.scrollTop > (event.srcElement.body.clientHeight / 3)) {
       this.showToTopButton();
@@ -72,22 +110,9 @@ export class App extends Component {
       {id: 1, title: "Projects"},
       {id: 2, title: "Pictures"},
       {id: 3, title: "Videos"},
-      {id: 4, title: "Guestbook"}
+      {id: 4, title: "Guestbook"},
+      {id: 5, title: "Movie List"}
     ];
-
-    var largeViewer;
-    if(this.state.usingLargeViewer) {
-      largeViewer = <EnlargedViewer imageId={this.state.imageToEnlarge} exitLargeViewer={this.exitLargeViewer}/>;
-    } else {
-      largeViewer = <div></div>;
-    }
-
-    var toTopButton;
-    if(this.state.toTopButtonVisible) {
-      toTopButton = <ToTopButton scrollToTop={this.hideToTopButton}/>;
-    } else {
-      toTopButton = <div></div>;
-    }
 
     return (
       <div className="mainBody">
@@ -96,12 +121,14 @@ export class App extends Component {
         </div>
 
         <div className="contentContainer">
-          <ContentContainer activeTab={this.state.activeTab} useLargeViewer={this.useLargeViewer}/>
+          <ContentContainer activeTab={this.state.activeTab} useLargeViewer={this.useLargeViewer} useMovieLightBox={this.showMovieLightBox}/>
         </div>
 
-        {largeViewer}
+        {this.getEnlargedViewer()}
 
-        {toTopButton}
+        {this.getMovieLightBox()}
+
+        {this.getToTopButton()}
       </div>
     );
   }

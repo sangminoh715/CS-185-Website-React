@@ -7,7 +7,7 @@ import "./EnlargedViewer.css";
 export class EnlargedViewer extends Component {
   render() {
     return (
-      <div className="viewer" onClick={(event) => {
+      <div className="enlargedImageViewContainer" onClick={(event) => {
         if(event.target === event.currentTarget) {
           this.props.exitLargeViewer();
         }

@@ -1,0 +1,18 @@
+.posterGallery {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-content: flex-start;
+}
+
+.moviePoster {
+  width: max(300px, 22vw);
+  height: calc(max(300px, 22vw) * 1.5);
+
+  margin: 10px;
+}
+
+.moviePoster:hover {
+  cursor: pointer;
+  opacity: 75%;
+}

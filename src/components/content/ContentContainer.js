@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import Home from "./home/Home";
 import Guestbook from "./guestbook/Guestbook";
+import MovieList from "./movies/MovieList";
 import Pictures from "./pictures/Pictures";
 import Projects from "./projects/Projects";
 import Videos from "./videos/Videos";
@@ -22,6 +23,8 @@ export class ContentContainer extends Component {
         return <Videos/>;
       case 4:
         return <Guestbook/>;
+      case 5:
+        return <MovieList useMovieLightBox={this.props.useMovieLightBox}/>;
     }
   };
 
