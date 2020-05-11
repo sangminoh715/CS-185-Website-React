@@ -5,9 +5,9 @@ export class Movie extends Component {
     return (
       <img 
         className="moviePoster"
-        alt={this.props.title}
-        src={this.props.poster}
-        onClick={this.props.useMovieLightBox.bind(this, this.props.poster, this.props.title, this.props.director, this.props.rating)} />
+        alt={this.props.movieInformation.title}
+        src={this.props.movieInformation.poster}
+        onClick={this.props.useMovieLightBox.bind(this, this.props.movieInformation)} />
     );
   }
 }

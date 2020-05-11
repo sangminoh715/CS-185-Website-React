@@ -31,10 +31,7 @@ export class MovieList extends Component {
             this.state.movieInformation.map((information) => {
               return (
                 <Movie 
-                  poster={information.poster}
-                  title={information.title}
-                  director={information.director}
-                  rating={information.rating}
+                  movieInformation={information}
                   useMovieLightBox={this.props.useMovieLightBox}
                   />
               );  
@@ -53,7 +50,11 @@ export class MovieList extends Component {
             poster: response.data.Poster, 
             title: response.data.Title,
             director: response.data.Director, 
-            rating: response.data.imdbRating
+            rating: response.data.imdbRating,
+            plot: response.data.Plot,
+            year: response.data.Year,
+            runtime: response.data.Runtime,
+            genre: response.data.Genre
           };
 
           this.setState({

@@ -12,7 +12,20 @@ export class MovieLightBox extends Component {
       }}>
 
         <div className="movieLightBox">
+          <img className="posterLightBox" src={this.props.movieInformation.poster} alt={this.props.movieInformation.title}/>
+          <div className="informationLightBox">
+            <h1>{this.props.movieInformation.title} ({this.props.movieInformation.year})</h1>
+            <br/>
           
+            <p align="left">{this.props.movieInformation.genre} · {this.props.movieInformation.runtime}</p>
+            <p align="left">IMDb Rating <b>{this.props.movieInformation.rating}</b></p>
+            <br/>
+
+            <p align="left">{this.props.movieInformation.plot}</p>
+            <br/>
+
+            <p align="left">Directed by <b>{this.props.movieInformation.director}</b></p>
+          </div>
         </div>
 
       </div>

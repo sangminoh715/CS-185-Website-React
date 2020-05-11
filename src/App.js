@@ -12,16 +12,13 @@ export class App extends Component {
   constructor() {
     super();
     this.state = {
-      activeTab: 5,
+      activeTab: 0,
 
       usingLargeViewer: false,
       imageToEnlarge: -1,
 
       usingVideoLightBox: false,
-      poster: "",
-      title: "",
-      director: "",
-      rating: "",
+      movieInformation: {},
 
       toTopButtonVisible: false
     }
@@ -48,14 +45,11 @@ export class App extends Component {
       });
     };
 
-    this.showMovieLightBox = (moviePoster, movieTitle, movieDirector, movieRating) => {
+    this.showMovieLightBox = (clickedMovieInformation) => {
       document.body.classList.add("fixedView");
       this.setState({
         usingMovieLightBox: true,
-        poster: moviePoster,
-        title: movieTitle,
-        director: movieDirector,
-        rating: movieRating
+        movieInformation: clickedMovieInformation
       });
     };
 
@@ -63,10 +57,7 @@ export class App extends Component {
       document.body.classList.remove("fixedView");
       this.setState({
         usingMovieLightBox: false,
-        poster: "",
-        title: "",
-        director: "",
-        rating: ""
+        movieInformation: {}
       });
     }
 
@@ -95,7 +86,7 @@ export class App extends Component {
 
   getMovieLightBox = () => {
     if(this.state.usingMovieLightBox) {
-      return <MovieLightBox poster={this.state.poster} title={this.state.title} director={this.state.director} rating={this.state.rating} exitLightBox={this.exitMovieLightBox}/>;
+      return <MovieLightBox movieInformation={this.state.movieInformation} exitLightBox={this.exitMovieLightBox}/>;
     }
   }
 

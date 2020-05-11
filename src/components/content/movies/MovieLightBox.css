@@ -15,9 +15,32 @@
 }
 
 .movieLightBox {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-items: center center;
+
   width: 90%;
-  max-width: 1200px;
+  max-width: 800px;
   height: auto;
 
+  background-color: #FFFFFF;
+  border-radius: 0.2rem;
+
   z-index: 10000;
+}
+
+.posterLightBox {
+  grid-column: 1;
+
+  width: 90%;
+  height: auto;
+  margin: 10px;
+}
+
+.informationLightBox {
+  grid-column: 2;
+
+  width: 80%;
+  height: auto;
+  margin: 10px;
 }
