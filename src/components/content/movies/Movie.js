@@ -6,7 +6,8 @@ export class Movie extends Component {
       <img 
         className="moviePoster"
         alt={this.props.title}
-        src={this.props.poster} />
+        src={this.props.poster}
+        onClick={this.props.useMovieLightBox.bind(this, this.props.poster, this.props.title, this.props.director, this.props.rating)} />
     );
   }
 }

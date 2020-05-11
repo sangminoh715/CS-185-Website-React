@@ -35,6 +35,7 @@ export class MovieList extends Component {
                   title={information.title}
                   director={information.director}
                   rating={information.rating}
+                  useMovieLightBox={this.props.useMovieLightBox}
                   />
               );  
             })

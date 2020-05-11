@@ -1,4 +1,4 @@
-.enlargedImageViewContainer {
+.movieLightBoxContainer {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,13 +11,13 @@
   justify-content: center;
   align-items: center;
 
-  z-index: 9999; /* Make sure the viewer is above other page elements */
+  z-index: 9999; 
 }
 
-.enlargedImage {
+.movieLightBox {
   width: 90%;
   max-width: 1200px;
   height: auto;
 
-  z-index: 10000; /* Make sure the enlarged image is the top-most element */
+  z-index: 10000;
 }
