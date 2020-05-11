@@ -44,7 +44,7 @@ export class MovieList extends Component {
 
   componentDidMount() {
     Movies.map((movie) => (
-      Axios.get("http://www.omdbapi.com/?apikey=" + this.omdbAPIKey + "&i=" + movie.id)
+      Axios.get("https://www.omdbapi.com/?apikey=" + this.omdbAPIKey + "&i=" + movie.id)
         .then((response) => {
           const newMovieInformation = {
             poster: response.data.Poster, 
