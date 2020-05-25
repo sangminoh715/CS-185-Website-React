@@ -45,7 +45,15 @@ export class MovieList extends Component {
   }
 
   displayMovies = () => {
-    return;
+    return (
+      <div className="posterGallery">
+        {
+          this.state.movies.map((movie) => {
+            return <Movie movieInformation={movie} useMovieLightBox={this.props.useMovieLightBox} />;
+          })
+        }
+      </div>
+    );
   }
 
   exitAddMovieModal = () => {
@@ -90,7 +98,48 @@ export class MovieList extends Component {
   }
 
   onAddNewMovie = (movieID) => {
-    console.log(movieID);
+    for(var i=0; i<this.state.movies.length; i+=1) {
+      if(this.state.movies[i].id === movieID) {
+        alert("[Warning] The movie with this ID already exists");
+        return;
+      }
+    }
+
+    Axios.get("https://www.omdbapi.com/?apikey=" + this.omdbAPIKey + "&i=" + movieID)
+      .then((response) => {
+        console.log(response);
+
+        if(response.data.Response === "True") {
+
+          const retrievedMovieInformation = {
+            id: movieID,
+            poster: response.data.Poster, 
+            title: response.data.Title,
+            director: response.data.Director, 
+            rating: response.data.imdbRating,
+            plot: response.data.Plot,
+            year: response.data.Year,
+            runtime: response.data.Runtime,
+            genre: response.data.Genre
+          };
+
+          Firebase.database().ref("movies").child(movieID).set(retrievedMovieInformation);
+          this.setState({
+            movies: [...this.state.movies, retrievedMovieInformation]
+          });
+
+          this.exitAddMovieModal();
+          alert("[Success] The movie has been added");
+
+        } else {
+          alert("[Error] Invalid movie ID");
+          return;
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .then(() => {});
   }
   
   onChangeSearchField = (event) => {
@@ -144,9 +193,7 @@ export class MovieList extends Component {
           </div>
         </div>
 
-        <div className="posterGallery">
-          {this.displayMovies()}
-        </div>
+        {this.displayMovies()}
 
         {this.getAddMovieModal()}
         {this.getAddMovieListModal()}
@@ -166,7 +213,7 @@ export class MovieList extends Component {
       });
     });
 
-    Firebase.database().ref("movies").on("value", (snapshot) => {
+    Firebase.database().ref("lists").on("value", (snapshot) => {
       const receivedValue = snapshot.val();
       this.setState({
         lists: Object.values(receivedValue)
