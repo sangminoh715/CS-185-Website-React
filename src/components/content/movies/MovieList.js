@@ -2,6 +2,8 @@ import Axios from "axios";
 import Firebase from "firebase";
 import React, {Component} from "react";
 
+import AddMovieModal from "./AddMovieModal";
+import AddMovieListModal from "./AddMovieListModal";
 import FirebaseConfig from "../../config/FirebaseConfig";
 import Movie from "./Movie";
 import PageHeader from "../PageHeader";
@@ -13,12 +15,17 @@ export class MovieList extends Component {
     super();
 
     this.state = {
-      lists: [],
       movies: [],
       numberVisible: 8,
 
+      currentList: "All",
       dropdownVisible: false,
-      searchField: ""
+      lists: [],
+
+      searchField: "",
+
+      usingAddMovieModal: false,
+      usingAddMovieListModal: false
     };
 
     this.omdbAPIKey = "7bfe31b4";
@@ -30,7 +37,7 @@ export class MovieList extends Component {
         <div id="dropdownContent" className="dropdownContent">
           <div className="listElement">All</div>
           <hr/>
-          <div className="listElement">Create List</div>
+          <div className="listElement" onClick={this.showAddMovieListModal}>Create List</div>
         </div>
       );
     }
@@ -38,6 +45,34 @@ export class MovieList extends Component {
   }
 
   displayMovies = () => {
+    return;
+  }
+
+  exitAddMovieModal = () => {
+    document.body.classList.remove("fixedView");
+    this.setState({
+      usingAddMovieModal: false
+    });
+  }
+
+  exitAddMovieListModal = () => {
+    document.body.classList.remove("fixedView");
+    this.setState({
+      usingAddMovieListModal: false
+    });
+  }
+
+  getAddMovieModal = () => {
+    if(this.state.usingAddMovieModal) {
+      return <AddMovieModal submit={this.onAddNewMovie} exitModal={this.exitAddMovieModal}/>;
+    }
+    return;
+  }
+
+  getAddMovieListModal = () => {
+    if(this.state.usingAddMovieListModal) {
+      return <AddMovieListModal submit={this.onAddNewList} exitModal={this.exitAddMovieListModal}/>;
+    }
     return;
   }
 
@@ -50,6 +85,14 @@ export class MovieList extends Component {
     }
   }
 
+  onAddNewList = (listName) => {
+    console.log(listName);
+  }
+
+  onAddNewMovie = (movieID) => {
+    console.log(movieID);
+  }
+  
   onChangeSearchField = (event) => {
     this.setState({
       searchField: event.target.value
@@ -62,6 +105,19 @@ export class MovieList extends Component {
     });
   }
 
+  showAddMovieModal = () => {
+    this.setState({
+      usingAddMovieModal: true
+    });
+  }
+
+  showAddMovieListModal = () => {
+    this.setState({
+      dropdownVisible: false,
+      usingAddMovieListModal: true
+    });
+  }
+
   render() {
     const title = "Movie List";
     const description = "This page features some of my favorite movies.";
@@ -71,18 +127,18 @@ export class MovieList extends Component {
         <PageHeader tabTitle={title} tabDescription={description}/>
 
         <div className="movieOptions">
-          <div className="option">
+          <div className="option" onClick={this.showAddMovieModal}>
             Add Movie
           </div>
 
           <div className="dropdownContainer">
             <div className="option dropdown-toggle" onClick={this.onDropdownToggle}>
-              All
+              {this.state.currentList}
             </div>
             {this.displayDropdown()}
           </div>
 
-          <input className="formField" type="text" id="message" value={this.state.searchField} onChange={this.onChangeSearchField}/>
+          <input className="searchField" type="text" id="message" value={this.state.searchField} onChange={this.onChangeSearchField}/>
           <div className="option searchButton">
             Search
           </div>
@@ -91,6 +147,9 @@ export class MovieList extends Component {
         <div className="posterGallery">
           {this.displayMovies()}
         </div>
+
+        {this.getAddMovieModal()}
+        {this.getAddMovieListModal()}
       </div>
     );
   }

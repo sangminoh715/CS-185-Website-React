@@ -24,7 +24,7 @@ export class ContentContainer extends Component {
       case 4:
         return <Guestbook/>;
       case 5:
-        return <MovieList useMovieLightBox={this.props.useMovieLightBox}/>;
+        return <MovieList useMovieLightBox={this.props.useMovieLightBox} />;
     }
   };
 

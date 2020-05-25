@@ -12,7 +12,7 @@ export class App extends Component {
   constructor() {
     super();
     this.state = {
-      activeTab: 0,
+      activeTab: 5,
 
       usingLargeViewer: false,
       imageToEnlarge: -1,
@@ -121,7 +121,7 @@ export class App extends Component {
         </div>
 
         <div className="contentContainer">
-          <ContentContainer activeTab={this.state.activeTab} useLargeViewer={this.useLargeViewer} useMovieLightBox={this.showMovieLightBox}/>
+          <ContentContainer activeTab={this.state.activeTab} useLargeViewer={this.useLargeViewer} useMovieLightBox={this.showMovieLightBox} />
         </div>
 
         {this.getEnlargedViewer()}

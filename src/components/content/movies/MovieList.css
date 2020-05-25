@@ -21,7 +21,7 @@
   margin: 0 5px;
   padding: 0.1rem 0;
 
-  width: 6.5vw;
+  min-width: 70px;
 
   background-color: white;
   border: 1px solid #E0E0E0;
@@ -56,7 +56,7 @@
   vertical-align: center;
   text-decoration: none;
 
-  width: 6.5vw;
+  min-width: 70px;
 
   margin: 0 5px;
   padding: 0.25rem 0.5rem;
@@ -75,27 +75,33 @@
 }
 
 .searchButton {
-  background-color: #228D3A;
-  border: 1px solid #228D3A; 
+  background-color: #0CB332;
+  border: 1px solid #0CB332; 
 }
 
 .searchButton:hover {
-  background-color: #218537;
-  border: 1px solid #218537; 
+  background-color: #0CAB30;
+  border: 1px solid #0CAB30; 
 }
 
-.formField {
+.searchField {
   display: block; 
   overflow: visible;
 
   font-size: 0.875rem;
 
-  width: 10vw;
+  min-width: 80px;
 
   margin: 0 5px;
   margin-left: 30px;
   padding: 0.25rem 0.5rem;
-  border-radius: 0.2rem;
+
+  border: 1px solid #CED4DA;
+  border-radius: 0.2rem
+}
+
+.searchField:focus {
+  border: 1px solid #80BDFF;
 }
 
 .posterGallery {
