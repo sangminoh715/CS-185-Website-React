@@ -44,3 +44,34 @@
   height: auto;
   margin: 10px;
 }
+
+.lightBoxButton {
+  display: inline-block;
+
+  font-size: 0.875rem;
+  text-align: center;
+  vertical-align: center;
+  text-decoration: none;
+
+  min-width: 70px;
+
+  margin: 0 5px;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.2rem;
+
+  color: white;
+}
+
+.lightBoxDeleteButton {
+  margin-left: 0;
+  
+  background-color: #D61913;
+  border: 1px solid #D61913;
+}
+
+.lightBoxDeleteButton:hover {
+  cursor: pointer;
+
+  background-color: #B0120C;
+  border: 1px solid #B0120C;
+}

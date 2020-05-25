@@ -6,6 +6,7 @@ import AddMovieModal from "./AddMovieModal";
 import AddMovieListModal from "./AddMovieListModal";
 import FirebaseConfig from "../../config/FirebaseConfig";
 import Movie from "./Movie";
+import MovieLightBox from "./MovieLightBox";
 import PageHeader from "../PageHeader";
 
 import "./MovieList.css";
@@ -25,7 +26,9 @@ export class MovieList extends Component {
       searchField: "",
 
       usingAddMovieModal: false,
-      usingAddMovieListModal: false
+      usingAddMovieListModal: false,
+      usingMovieLightBox: false,
+      lightBoxContent: {}
     };
 
     this.omdbAPIKey = "7bfe31b4";
@@ -49,7 +52,7 @@ export class MovieList extends Component {
       <div className="posterGallery">
         {
           this.state.movies.map((movie) => {
-            return <Movie movieInformation={movie} useMovieLightBox={this.props.useMovieLightBox} />;
+            return <Movie movieInformation={movie} useMovieLightBox={this.showMovieLightBox} />;
           })
         }
       </div>
@@ -70,6 +73,14 @@ export class MovieList extends Component {
     });
   }
 
+  exitMovieLightBox = () => {
+    document.body.classList.remove("fixedView");
+    this.setState({
+      usingMovieLightBox: false,
+      lightBoxContent: {}
+    });
+  }
+
   getAddMovieModal = () => {
     if(this.state.usingAddMovieModal) {
       return <AddMovieModal submit={this.onAddNewMovie} exitModal={this.exitAddMovieModal}/>;
@@ -80,6 +91,13 @@ export class MovieList extends Component {
   getAddMovieListModal = () => {
     if(this.state.usingAddMovieListModal) {
       return <AddMovieListModal submit={this.onAddNewList} exitModal={this.exitAddMovieListModal}/>;
+    }
+    return;
+  }
+
+  getMovieLightBox = () => {
+    if(this.state.usingMovieLightBox) {
+      return <MovieLightBox movieInformation={this.state.lightBoxContent} exitLightBox={this.exitMovieLightBox} deleteMovie={this.onDeleteMovie} />;
     }
     return;
   }
@@ -145,6 +163,13 @@ export class MovieList extends Component {
     });
   }
 
+  onDeleteMovie = (movieID) => {
+    Firebase.database().ref("movies").child(movieID).remove();
+
+    this.exitMovieLightBox();
+    alert("[Success] The movie has been deleted");
+  }
+
   onDropdownToggle = () => {
     this.setState({
       dropdownVisible: !this.state.dropdownVisible
@@ -152,15 +177,25 @@ export class MovieList extends Component {
   }
 
   showAddMovieModal = () => {
+    document.body.classList.add("fixedView");
     this.setState({
       usingAddMovieModal: true
     });
   }
 
   showAddMovieListModal = () => {
+    document.body.classList.add("fixedView");
     this.setState({
       dropdownVisible: false,
       usingAddMovieListModal: true
+    });
+  }
+
+  showMovieLightBox = (clickedMovieInformation) => {
+    document.body.classList.add("fixedView");
+    this.setState({
+      usingMovieLightBox: true,
+      lightBoxContent: clickedMovieInformation
     });
   }
 
@@ -194,6 +229,7 @@ export class MovieList extends Component {
 
         {this.getAddMovieModal()}
         {this.getAddMovieListModal()}
+        {this.getMovieLightBox()}
       </div>
     );
   }
@@ -216,30 +252,6 @@ export class MovieList extends Component {
         lists: Object.values(receivedValue)
       });
     });
-
-    /*movies.map((movie) => (
-      Axios.get("https://www.omdbapi.com/?apikey=" + this.omdbAPIKey + "&i=" + movie.id)
-        .then((response) => {
-          const newMovieInformation = {
-            poster: response.data.Poster, 
-            title: response.data.Title,
-            director: response.data.Director, 
-            rating: response.data.imdbRating,
-            plot: response.data.Plot,
-            year: response.data.Year,
-            runtime: response.data.Runtime,
-            genre: response.data.Genre
-          };
-
-          this.setState({
-            movieInformation: [...this.state.movieInformation, newMovieInformation]
-          });
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-        .then(() => {})
-    ));*/
 
     document.addEventListener("click", this.handleClickOutsideDropdown);
   }

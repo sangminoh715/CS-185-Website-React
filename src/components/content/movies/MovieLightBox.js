@@ -25,6 +25,11 @@ export class MovieLightBox extends Component {
             <br/>
 
             <p align="left">Directed by <b>{this.props.movieInformation.director}</b></p>
+            <br/>
+
+            <div className="lightBoxButton lightBoxDeleteButton" onClick={this.props.deleteMovie.bind(this, this.props.movieInformation.id)}>
+              Delete
+            </div>
           </div>
         </div>
 
