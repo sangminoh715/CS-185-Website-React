@@ -39,6 +39,11 @@ export class MovieList extends Component {
       return (
         <div id="dropdownContent" className="dropdownContent">
           <div className="listElement">All</div>
+          {
+            this.state.lists.map((list) => {
+              return <div className="listElement" onClick={this.onListClicked.bind(this, list.name)}>{list.name}</div>;
+            })
+          }
           <hr/>
           <div className="listElement" onClick={this.showAddMovieListModal}>Create List</div>
         </div>
@@ -112,7 +117,21 @@ export class MovieList extends Component {
   }
 
   onAddNewList = (listName) => {
-    console.log(listName);
+    for(var i=0; i<this.state.lists.length; i+=1) {
+      if(this.state.lists[i].name === listName) {
+        alert("[Warning] A list with this name already exists");
+        return;
+      }
+    }
+
+    const newList = {
+      name: listName,
+      movies: []
+    };
+    Firebase.database().ref("lists").push().set(newList);
+
+    this.exitAddMovieListModal();
+    alert("[Success] A new list has been created");
   }
 
   onAddNewMovie = (movieID) => {
@@ -174,6 +193,11 @@ export class MovieList extends Component {
     this.setState({
       dropdownVisible: !this.state.dropdownVisible
     });
+  }
+
+  onListClicked = (listName) => {
+    // [TODO]
+    console.log(listName);
   }
 
   showAddMovieModal = () => {
