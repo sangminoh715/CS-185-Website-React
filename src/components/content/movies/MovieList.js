@@ -124,9 +124,6 @@ export class MovieList extends Component {
           };
 
           Firebase.database().ref("movies").child(movieID).set(retrievedMovieInformation);
-          this.setState({
-            movies: [...this.state.movies, retrievedMovieInformation]
-          });
 
           this.exitAddMovieModal();
           alert("[Success] The movie has been added");
