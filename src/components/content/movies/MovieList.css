@@ -1,3 +1,103 @@
+.movieOptions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 35px;
+  padding: 0.5rem 1rem;
+}
+
+.dropdownContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdownContent {
+  position: absolute;
+
+  font-size: 0.875rem;
+
+  margin: 0 5px;
+  padding: 0.1rem 0;
+
+  width: 6.5vw;
+
+  background-color: white;
+  border: 1px solid #E0E0E0;
+  border-radius: 0.2rem;
+
+  z-index: 1;
+}
+
+.dropdownContent > div {
+  display: block;
+
+  color: black;
+  padding: 0.25rem 0.5rem;
+  text-decoration: none;
+}
+
+.dropdownContent > div:hover {
+  cursor: pointer;
+  background-color: #E0E0E0;
+}
+
+.dropdownContent > hr {
+  margin: 0.2rem 0;
+  padding: 0 0;
+}
+
+.option {
+  display: inline-block;
+
+  font-size: 0.875rem !important;
+  text-align: center;
+  vertical-align: center;
+  text-decoration: none;
+
+  width: 6.5vw;
+
+  margin: 0 5px;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.2rem;
+
+  color: white;
+  background-color: #007BFF;
+  border: 1px solid #007BFF; 
+}
+
+.option:hover {
+  cursor: pointer;
+
+  background-color: #0066FF;
+  border: 1px solid #0066FF;
+}
+
+.searchButton {
+  background-color: #228D3A;
+  border: 1px solid #228D3A; 
+}
+
+.searchButton:hover {
+  background-color: #218537;
+  border: 1px solid #218537; 
+}
+
+.formField {
+  display: block; 
+  overflow: visible;
+
+  font-size: 0.875rem;
+
+  width: 10vw;
+
+  margin: 0 5px;
+  margin-left: 30px;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.2rem;
+}
+
 .posterGallery {
   display: flex;
   flex-flow: row wrap;

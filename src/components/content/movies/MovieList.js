@@ -1,22 +1,65 @@
 import Axios from "axios";
+import Firebase from "firebase";
 import React, {Component} from "react";
 
+import FirebaseConfig from "../../config/FirebaseConfig";
 import Movie from "./Movie";
 import PageHeader from "../PageHeader";
 
 import "./MovieList.css";
-
-import Movies from "./movies.json";
 
 export class MovieList extends Component {
   constructor() {
     super();
 
     this.state = {
-      movieInformation: []
+      lists: [],
+      movies: [],
+      numberVisible: 8,
+
+      dropdownVisible: false,
+      searchField: ""
     };
 
     this.omdbAPIKey = "7bfe31b4";
+  }
+
+  displayDropdown = () => {
+    if(this.state.dropdownVisible) {
+      return (
+        <div id="dropdownContent" className="dropdownContent">
+          <div className="listElement">All</div>
+          <hr/>
+          <div className="listElement">Create List</div>
+        </div>
+      );
+    }
+    return;
+  }
+
+  displayMovies = () => {
+    return;
+  }
+
+  handleClickOutsideDropdown = (event) => {
+    event.stopPropagation();
+    if(event.target.className !== "listElement" && event.target.className !== "option dropdown-toggle") {
+      this.setState({
+        dropdownVisible: false
+      });
+    }
+  }
+
+  onChangeSearchField = (event) => {
+    this.setState({
+      searchField: event.target.value
+    });
+  }
+
+  onDropdownToggle = () => {
+    this.setState({
+      dropdownVisible: !this.state.dropdownVisible
+    });
   }
 
   render() {
@@ -26,24 +69,52 @@ export class MovieList extends Component {
     return (
       <div>
         <PageHeader tabTitle={title} tabDescription={description}/>
+
+        <div className="movieOptions">
+          <div className="option">
+            Add Movie
+          </div>
+
+          <div className="dropdownContainer">
+            <div className="option dropdown-toggle" onClick={this.onDropdownToggle}>
+              All
+            </div>
+            {this.displayDropdown()}
+          </div>
+
+          <input className="formField" type="text" id="message" value={this.state.searchField} onChange={this.onChangeSearchField}/>
+          <div className="option searchButton">
+            Search
+          </div>
+        </div>
+
         <div className="posterGallery">
-          {
-            this.state.movieInformation.map((information) => {
-              return (
-                <Movie 
-                  movieInformation={information}
-                  useMovieLightBox={this.props.useMovieLightBox}
-                  />
-              );  
-            })
-          }
+          {this.displayMovies()}
         </div>
       </div>
     );
   }
 
   componentDidMount() {
-    Movies.map((movie) => (
+    if(!Firebase.apps.length) {
+      Firebase.initializeApp(FirebaseConfig);
+    }
+
+    Firebase.database().ref("movies").on("value", (snapshot) => {
+      const receivedValue = snapshot.val();
+      this.setState({
+        movies: Object.values(receivedValue)
+      });
+    });
+
+    Firebase.database().ref("movies").on("value", (snapshot) => {
+      const receivedValue = snapshot.val();
+      this.setState({
+        lists: Object.values(receivedValue)
+      });
+    });
+
+    /*movies.map((movie) => (
       Axios.get("https://www.omdbapi.com/?apikey=" + this.omdbAPIKey + "&i=" + movie.id)
         .then((response) => {
           const newMovieInformation = {
@@ -65,7 +136,9 @@ export class MovieList extends Component {
           console.log(error);
         })
         .then(() => {})
-    ));
+    ));*/
+
+    document.addEventListener("click", this.handleClickOutsideDropdown);
   }
 }
 
