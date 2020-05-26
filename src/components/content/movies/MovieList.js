@@ -38,7 +38,7 @@ export class MovieList extends Component {
     if(this.state.dropdownVisible) {
       return (
         <div id="dropdownContent" className="dropdownContent">
-          <div className="listElement">All</div>
+          <div className="listElement" onClick={this.onListClicked.bind(this, "All")}>All</div>
           {
             this.state.lists.map((list) => {
               return <div className="listElement" onClick={this.onListClicked.bind(this, list.name)}>{list.name}</div>;
@@ -102,7 +102,7 @@ export class MovieList extends Component {
 
   getMovieLightBox = () => {
     if(this.state.usingMovieLightBox) {
-      return <MovieLightBox movieInformation={this.state.lightBoxContent} exitLightBox={this.exitMovieLightBox} deleteMovie={this.onDeleteMovie} />;
+      return <MovieLightBox movieInformation={this.state.lightBoxContent} exitLightBox={this.exitMovieLightBox} deleteMovie={this.onDeleteMovie} lists={this.state.lists} addToList={this.onAddToList} />;
     }
     return;
   }
@@ -128,7 +128,7 @@ export class MovieList extends Component {
       name: listName,
       movies: []
     };
-    Firebase.database().ref("lists").push().set(newList);
+    Firebase.database().ref("lists").child(listName).set(newList);
 
     this.exitAddMovieListModal();
     alert("[Success] A new list has been created");
@@ -174,6 +174,26 @@ export class MovieList extends Component {
         console.log(error);
       })
       .then(() => {});
+  }
+
+  onAddToList = (listName, movieInformation) => {
+    var listUpdate = {};
+
+    for(var i=0; i<this.state.lists.length; i+=1) {
+      if(this.state.lists[i].name === listName) {
+        listUpdate.name = listName;
+        if(typeof this.state.lists[i].movies === "undefined") {
+          listUpdate.movies = [movieInformation];
+        } else {
+          listUpdate.movies = [...this.state.lists[i].movies, movieInformation];
+        }
+      }
+    }
+
+    Firebase.database().ref("lists").child(listName).update(listUpdate);
+
+    this.exitMovieLightBox();
+    alert("[Success] The movie has been added to the list");
   }
   
   onChangeSearchField = (event) => {
@@ -278,6 +298,10 @@ export class MovieList extends Component {
     });
 
     document.addEventListener("click", this.handleClickOutsideDropdown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("click", this.handleClickOutsideDropdown);
   }
 }
 
