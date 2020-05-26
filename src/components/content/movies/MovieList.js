@@ -24,6 +24,7 @@ export class MovieList extends Component {
       lists: [],
 
       searchField: "",
+      filterOn: false,
 
       usingAddMovieModal: false,
       usingAddMovieListModal: false,
@@ -69,12 +70,21 @@ export class MovieList extends Component {
       }
     }
 
-    // [TODO] Additional filtering based on search
+    var filteredListToUse;
+    if(this.state.filterOn) {
+      filteredListToUse = listToUse.filter((movie) => {
+        const title = movie.title.toLowerCase();
+        const search = this.state.searchField.toLowerCase();
+        return title.length >= search.length && title.slice(0, search.length) === search;
+      });
+    } else {
+      filteredListToUse = listToUse;
+    }
 
     return (
       <div className="posterGallery">
         {
-          listToUse.map((movie) => {
+          filteredListToUse.map((movie) => {
             return <Movie movieInformation={movie} useMovieLightBox={this.showMovieLightBox} />;
           })
         }
@@ -214,7 +224,8 @@ export class MovieList extends Component {
   
   onChangeSearchField = (event) => {
     this.setState({
-      searchField: event.target.value
+      searchField: event.target.value,
+      filterOn: (event.target.value.length > 0)
     });
   }
 
@@ -298,10 +309,7 @@ export class MovieList extends Component {
             {this.displayDropdown()}
           </div>
 
-          <input className="searchField" type="text" id="message" value={this.state.searchField} onChange={this.onChangeSearchField}/>
-          <div className="option searchButton">
-            Search
-          </div>
+          <input className="searchField" type="text" id="message" value={this.state.searchField} placeholder="Search Movie By Title" onChange={this.onChangeSearchField}/>
         </div>
 
         {this.displayMovies()}

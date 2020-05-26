@@ -74,23 +74,13 @@
   border: 1px solid #0066FF;
 }
 
-.searchButton {
-  background-color: #0CB332;
-  border: 1px solid #0CB332; 
-}
-
-.searchButton:hover {
-  background-color: #0CAB30;
-  border: 1px solid #0CAB30; 
-}
-
 .searchField {
   display: block; 
   overflow: visible;
 
   font-size: 0.875rem;
 
-  min-width: 80px;
+  min-width: 170px;
 
   margin: 0 5px;
   margin-left: 30px;
