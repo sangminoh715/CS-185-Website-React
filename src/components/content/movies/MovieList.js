@@ -53,10 +53,28 @@ export class MovieList extends Component {
   }
 
   displayMovies = () => {
+    var listToUse;
+    if(this.state.currentList === "All") {
+      listToUse = this.state.movies;
+    } else {
+      for(var i=0; i<this.state.lists.length; i+=1) {
+        if(this.state.lists[i].name === this.state.currentList) {
+          if(typeof this.state.lists[i].movies === "undefined") {
+            listToUse = []
+          } else {
+            listToUse = this.state.lists[i].movies;
+          }
+          break;
+        }
+      }
+    }
+
+    // [TODO] Additional filtering based on search
+
     return (
       <div className="posterGallery">
         {
-          this.state.movies.map((movie) => {
+          listToUse.map((movie) => {
             return <Movie movieInformation={movie} useMovieLightBox={this.showMovieLightBox} />;
           })
         }
@@ -231,8 +249,10 @@ export class MovieList extends Component {
   }
 
   onListClicked = (listName) => {
-    // [TODO]
-    console.log(listName);
+    this.setState({
+      currentList: listName,
+      dropdownVisible: false
+    });
   }
 
   showAddMovieModal = () => {
