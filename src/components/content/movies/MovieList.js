@@ -144,8 +144,6 @@ export class MovieList extends Component {
 
     Axios.get("https://www.omdbapi.com/?apikey=" + this.omdbAPIKey + "&i=" + movieID)
       .then((response) => {
-        console.log(response);
-
         if(response.data.Response === "True") {
 
           const retrievedMovieInformation = {
@@ -204,6 +202,23 @@ export class MovieList extends Component {
 
   onDeleteMovie = (movieID) => {
     Firebase.database().ref("movies").child(movieID).remove();
+
+    for(var i=0; i<this.state.lists.length; i+=1) {
+      if(typeof this.state.lists[i].movies !== "undefined") {
+        var listUpdate = {};
+        listUpdate.name = this.state.lists[i].name;
+        listUpdate.movies = [];
+
+        for(var j=0; j<this.state.lists[i].movies.length; j+=1) {
+          if(this.state.lists[i].movies[j].id !== movieID) {
+            listUpdate.movies.push(this.state.lists[i].movies[j]);
+          }
+        }
+
+        Firebase.database().ref("lists").child(listUpdate.name).remove();
+        Firebase.database().ref("lists").child(listUpdate.name).set(listUpdate);
+      }
+    }
 
     this.exitMovieLightBox();
     alert("[Success] The movie has been deleted");
