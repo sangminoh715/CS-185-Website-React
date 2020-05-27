@@ -48,7 +48,7 @@
   padding: 0 0;
 }
 
-.option {
+.option, .loadMoreButton{
   display: inline-block;
 
   font-size: 0.875rem !important;
@@ -111,4 +111,27 @@
 .moviePoster:hover {
   cursor: pointer;
   opacity: 0.75;
+}
+
+.loadMoreButtonContainer {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+
+  margin: 10px 0;
+
+  width: 100%;
+}
+
+.loadMoreButton {
+  background-color: #6C757D;
+  border: 1px solid #6C757D;
+}
+
+.loadMoreButton:hover {
+  cursor: pointer;
+  
+  background-color: #656E75;
+  border: 1px solid #656E75;
 }

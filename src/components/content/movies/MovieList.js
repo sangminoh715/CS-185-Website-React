@@ -17,7 +17,6 @@ export class MovieList extends Component {
 
     this.state = {
       movies: [],
-      numberVisible: 8,
 
       currentList: "All",
       dropdownVisible: false,
@@ -29,7 +28,9 @@ export class MovieList extends Component {
       usingAddMovieModal: false,
       usingAddMovieListModal: false,
       usingMovieLightBox: false,
-      lightBoxContent: {}
+      lightBoxContent: {},
+
+      numberLoaded: 8
     };
 
     this.omdbAPIKey = "7bfe31b4";
@@ -53,38 +54,28 @@ export class MovieList extends Component {
     return;
   }
 
-  displayMovies = () => {
-    var listToUse;
-    if(this.state.currentList === "All") {
-      listToUse = this.state.movies;
-    } else {
-      for(var i=0; i<this.state.lists.length; i+=1) {
-        if(this.state.lists[i].name === this.state.currentList) {
-          if(typeof this.state.lists[i].movies === "undefined") {
-            listToUse = []
-          } else {
-            listToUse = this.state.lists[i].movies;
-          }
-          break;
-        }
-      }
-    }
+  displayLoadMoreButton = () => {
+    const listToUse = this.filterMovies();
 
-    var filteredListToUse;
-    if(this.state.filterOn) {
-      filteredListToUse = listToUse.filter((movie) => {
-        const title = movie.title.toLowerCase();
-        const search = this.state.searchField.toLowerCase();
-        return title.length >= search.length && title.slice(0, search.length) === search;
-      });
-    } else {
-      filteredListToUse = listToUse;
+    if(listToUse.length > this.state.numberLoaded) {
+      return (
+        <div className="loadMoreButtonContainer">
+          <div className="loadMoreButton" onClick={this.onLoadMoreButtonClick}>
+            Load More
+          </div>
+        </div>
+      );
     }
+    return;
+  }
+
+  displayMovies = () => {
+    const listToUse = this.filterMovies();
 
     return (
       <div className="posterGallery">
         {
-          filteredListToUse.map((movie) => {
+          listToUse.slice(0, this.state.numberLoaded).map((movie) => {
             return <Movie movieInformation={movie} useMovieLightBox={this.showMovieLightBox} />;
           })
         }
@@ -112,6 +103,37 @@ export class MovieList extends Component {
       usingMovieLightBox: false,
       lightBoxContent: {}
     });
+  }
+
+  filterMovies = () => {
+    var listToUse;
+    if(this.state.currentList === "All") {
+      listToUse = this.state.movies;
+    } else {
+      for(var i=0; i<this.state.lists.length; i+=1) {
+        if(this.state.lists[i].name === this.state.currentList) {
+          if(typeof this.state.lists[i].movies === "undefined") {
+            listToUse = []
+          } else {
+            listToUse = this.state.lists[i].movies;
+          }
+          break;
+        }
+      }
+    }
+
+    var filteredListToUse;
+    if(this.state.filterOn) {
+      filteredListToUse = listToUse.filter((movie) => {
+        const title = movie.title.toLowerCase();
+        const search = this.state.searchField.toLowerCase();
+        return title.length >= search.length && title.slice(0, search.length) === search;
+      });
+    } else {
+      filteredListToUse = listToUse;
+    }
+
+    return filteredListToUse;
   }
 
   getAddMovieModal = () => {
@@ -266,6 +288,12 @@ export class MovieList extends Component {
     });
   }
 
+  onLoadMoreButtonClick = () => {
+    this.setState({
+      numberLoaded: this.state.numberLoaded + 8,
+    });
+  }
+
   showAddMovieModal = () => {
     document.body.classList.add("fixedView");
     this.setState({
@@ -291,7 +319,7 @@ export class MovieList extends Component {
 
   render() {
     const title = "Movie List";
-    const description = "This page features some of my favorite movies.";
+    const description = "This page features some movies that I have watched or want to watch.";
 
     return (
       <div>
@@ -313,6 +341,8 @@ export class MovieList extends Component {
         </div>
 
         {this.displayMovies()}
+
+        {this.displayLoadMoreButton()}
 
         {this.getAddMovieModal()}
         {this.getAddMovieListModal()}
