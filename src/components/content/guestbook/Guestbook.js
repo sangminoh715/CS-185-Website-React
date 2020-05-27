@@ -1,3 +1,4 @@
+import Firebase from "firebase";
 import React, {Component} from "react";
 
 import FirebaseConfig from "../../config/FirebaseConfig";
@@ -6,8 +7,6 @@ import MessageCard from "./MessageCard";
 import PageHeader from "../PageHeader";
 
 import "./Guestbook.css";
-
-const Firebase = require("firebase");
 
 export class Guestbook extends Component {
   constructor() {

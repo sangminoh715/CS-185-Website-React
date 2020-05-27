@@ -44,3 +44,82 @@
   height: auto;
   margin: 10px;
 }
+
+.lightBoxButton {
+  display: inline-block;
+
+  font-size: 0.875rem;
+  text-align: center;
+  vertical-align: center;
+  text-decoration: none;
+
+  min-width: 80px;
+
+  margin: 0 5px;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.2rem;
+
+  color: white;
+}
+
+.lightBoxDeleteButton {
+  margin-left: 0;
+  
+  min-width: 65px;
+  
+  background-color: #D61913;
+  border: 1px solid #D61913;
+}
+
+.lightBoxDeleteButton:hover {
+  cursor: pointer;
+
+  background-color: #B0120C;
+  border: 1px solid #B0120C;
+}
+
+.addToListDropdownContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.addToListDropdownContent {
+  position: absolute;
+
+  font-size: 0.875rem;
+
+  margin: 0 5px;
+  padding: 0.1rem 0;
+
+  min-width: 80px;
+  background-color: white;
+  border: 1px solid #E0E0E0;
+  border-radius: 0.2rem;
+
+  z-index: 1;
+}
+
+.addToListDropdownContent > div {
+  display: block;
+
+  color: black;
+  padding: 0.25rem 0.5rem;
+  text-decoration: none;
+}
+
+.addToListDropdownContent > div:hover {
+  cursor: pointer;
+  background-color: #E0E0E0;
+}
+
+.lightBoxAddToListButton {
+  background-color: #007BFF;
+  border: 1px solid #007BFF; 
+}
+
+.lightBoxAddToListButton:hover {
+  cursor: pointer;
+
+  background-color: #0066FF;
+  border: 1px solid #0066FF;
+}

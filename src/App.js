@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 
 import ContentContainer from "./components/content/ContentContainer";
 import EnlargedViewer from "./components/content/pictures/EnlargedViewer";
-import MovieLightBox from "./components/content/movies/MovieLightBox";
 import NavBar from "./components/navigation/NavBar";
 import ToTopButton from "./components/navigation/ToTopButton";
 
@@ -16,9 +15,6 @@ export class App extends Component {
 
       usingLargeViewer: false,
       imageToEnlarge: -1,
-
-      usingVideoLightBox: false,
-      movieInformation: {},
 
       toTopButtonVisible: false
     }
@@ -45,22 +41,6 @@ export class App extends Component {
       });
     };
 
-    this.showMovieLightBox = (clickedMovieInformation) => {
-      document.body.classList.add("fixedView");
-      this.setState({
-        usingMovieLightBox: true,
-        movieInformation: clickedMovieInformation
-      });
-    };
-
-    this.exitMovieLightBox = () => {
-      document.body.classList.remove("fixedView");
-      this.setState({
-        usingMovieLightBox: false,
-        movieInformation: {}
-      });
-    }
-
     this.showToTopButton = () => {
       this.setState({
         toTopButtonVisible: true
@@ -81,12 +61,6 @@ export class App extends Component {
   getEnlargedViewer = () => {
     if(this.state.usingLargeViewer) {
       return <EnlargedViewer imageId={this.state.imageToEnlarge} exitLargeViewer={this.exitLargeViewer}/>;
-    }
-  }
-
-  getMovieLightBox = () => {
-    if(this.state.usingMovieLightBox) {
-      return <MovieLightBox movieInformation={this.state.movieInformation} exitLightBox={this.exitMovieLightBox}/>;
     }
   }
 
@@ -121,12 +95,10 @@ export class App extends Component {
         </div>
 
         <div className="contentContainer">
-          <ContentContainer activeTab={this.state.activeTab} useLargeViewer={this.useLargeViewer} useMovieLightBox={this.showMovieLightBox}/>
+          <ContentContainer activeTab={this.state.activeTab} useLargeViewer={this.useLargeViewer} useMovieLightBox={this.showMovieLightBox} />
         </div>
 
         {this.getEnlargedViewer()}
-
-        {this.getMovieLightBox()}
 
         {this.getToTopButton()}
       </div>
