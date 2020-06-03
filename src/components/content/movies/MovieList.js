@@ -5,6 +5,7 @@ import React, {Component} from "react";
 import AddMovieModal from "./AddMovieModal";
 import AddMovieListModal from "./AddMovieListModal";
 import FirebaseConfig from "../../config/FirebaseConfig";
+import GraphVisualization from "./GraphVisualization";
 import Movie from "./Movie";
 import MovieLightBox from "./MovieLightBox";
 import PageHeader from "../PageHeader";
@@ -29,6 +30,8 @@ export class MovieList extends Component {
       usingAddMovieListModal: false,
       usingMovieLightBox: false,
       lightBoxContent: {},
+
+      showingGraphVisualization: false,
 
       numberLoaded: 8
     };
@@ -105,6 +108,13 @@ export class MovieList extends Component {
     });
   }
 
+  exitGraphVisualization = () => {
+    document.body.classList.remove("fixedView");
+    this.setState({
+      showingGraphVisualization: false
+    });
+  }
+
   filterMovies = () => {
     var listToUse;
     if(this.state.currentList === "All") {
@@ -157,6 +167,23 @@ export class MovieList extends Component {
     return;
   }
 
+  getGraphVisualization = () => {
+    if(this.state.showingGraphVisualization) {
+      var graphIndex = -1;
+      for(var i=0; i<this.state.lists.length; i+=1) {
+        if(this.state.lists[i].name === "Graph") {
+          graphIndex = i;
+          break;
+        }
+      }
+
+      if(graphIndex > -1) {
+        return <GraphVisualization movies={this.state.lists[graphIndex].movies} exitGraphVisualization={this.exitGraphVisualization}/>;
+      }
+    }
+    return;
+  }
+
   handleClickOutsideDropdown = (event) => {
     event.stopPropagation();
     if(event.target.className !== "listElement" && event.target.className !== "option dropdown-toggle") {
@@ -196,6 +223,8 @@ export class MovieList extends Component {
       .then((response) => {
         if(response.data.Response === "True") {
 
+          const movieActors = response.data.Actors.split(",").map(actor => actor.trim());
+
           const retrievedMovieInformation = {
             id: movieID,
             poster: response.data.Poster, 
@@ -205,7 +234,8 @@ export class MovieList extends Component {
             plot: response.data.Plot,
             year: response.data.Year,
             runtime: response.data.Runtime,
-            genre: response.data.Genre
+            genre: response.data.Genre,
+            actors: movieActors
           };
 
           Firebase.database().ref("movies").child(movieID).set(retrievedMovieInformation);
@@ -309,6 +339,13 @@ export class MovieList extends Component {
     });
   }
 
+  showGraphVisualization = () => {
+    document.body.classList.add("fixedView");
+    this.setState({
+      showingGraphVisualization: true
+    });
+  }
+
   showMovieLightBox = (clickedMovieInformation) => {
     document.body.classList.add("fixedView");
     this.setState({
@@ -337,6 +374,10 @@ export class MovieList extends Component {
             {this.displayDropdown()}
           </div>
 
+          <div className="option" onClick={this.showGraphVisualization}>
+            Show Graph
+          </div>
+
           <input className="searchField" type="text" id="message" value={this.state.searchField} placeholder="Search Movie By Title" onChange={this.onChangeSearchField}/>
         </div>
 
@@ -347,6 +388,7 @@ export class MovieList extends Component {
         {this.getAddMovieModal()}
         {this.getAddMovieListModal()}
         {this.getMovieLightBox()}
+        {this.getGraphVisualization()}
       </div>
     );
   }

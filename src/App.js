@@ -11,7 +11,7 @@ export class App extends Component {
   constructor() {
     super();
     this.state = {
-      activeTab: 0,
+      activeTab: 5,
 
       usingLargeViewer: false,
       imageToEnlarge: -1,
