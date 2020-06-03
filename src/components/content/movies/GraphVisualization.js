@@ -53,6 +53,19 @@ export class GraphVisualization extends Component {
       .attr("viewBox", [0, 0, width, height])
       .attr("preserveAspectRatio", "xMinYMin meet");
 
+    var defs = svg.append("defs");
+    nodes.forEach((movie) => {
+      defs.append("pattern")
+        .attr("id", "poster" + movie.id)
+        .attr("width", 1)
+        .attr("height", 1)
+        .append("svg:image")
+        .attr("xlink:href", movie.poster)
+        .attr("width", 300)
+        .attr("height", 300)
+        .attr("x", -50);
+    });
+
     const svgLinks = svg.append("g")
       .attr("stroke", "#999")
       .attr("stroke-opacity", 0.8)
@@ -64,7 +77,7 @@ export class GraphVisualization extends Component {
     const color = (node) => {
       switch(node.group) {
         case 1:
-          return d3.color("pink");
+          return "url(#poster" + node.id + ")";
         case 2:
         default:
           return d3.color("gray");
@@ -120,9 +133,7 @@ export class GraphVisualization extends Component {
       }}>
 
         <div className="graphVisualization">
-          <div id="graphSvg" className="graphSvg">
-
-          </div>
+          <div id="graphSvg" className="graphSvg"></div>
         </div>
 
       </div>
@@ -132,11 +143,12 @@ export class GraphVisualization extends Component {
   componentDidMount () {
     var movieNodes = [];
     var actorNodes = [];
-    this.props.movies.forEach((movie) => {
+    this.props.movies.forEach((movie, index) => {
       movieNodes.push({
         title: movie.title,
         poster: movie.poster,
         actors: movie.actors,
+        id: index,
         group: 1
       });
 
@@ -155,6 +167,8 @@ export class GraphVisualization extends Component {
 
     this.data.nodes.push(...movieNodes);
     this.data.nodes.push(...actorNodes);
+
+    console.log(this.data.nodes)
 
     movieNodes.forEach((movie, index) => {
       movie.actors.forEach((actor) => {
