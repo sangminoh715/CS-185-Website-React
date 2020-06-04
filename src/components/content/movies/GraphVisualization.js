@@ -9,11 +9,6 @@ export class GraphVisualization extends Component {
   constructor() {
     super();
 
-    this.state = {
-      isHoveringOverActor: false,
-      targetActorNode: null
-    };
-
     this.data = {
       nodes: [],
       links: []
@@ -41,17 +36,13 @@ export class GraphVisualization extends Component {
 
       data.fx = data.x;
       data.fy = data.y;
+
+      this.isDragging = true;
     }
 
     const onDrag = (data) => {
       data.fx = d3.event.x;
       data.fy = d3.event.y;
-
-      /*if(data.group === 2) {
-        this.actorName.style("opacity", 0.9)
-          .style("left", (d3.event.pageX + 15) + "px")
-          .style("top", d3.event.pageY + "px");
-      }*/
     }
 
     const onDragEnd = (data) => {
@@ -60,6 +51,8 @@ export class GraphVisualization extends Component {
 
       data.fx = null;
       data.fy = null;
+
+      this.isDragging = false;
     }
 
     return d3.drag()
@@ -73,11 +66,6 @@ export class GraphVisualization extends Component {
 
     const objectNodes = nodes.map(data => Object.create(data));
     const objectLinks = links.map(data => Object.create(data));
-
-    var actorName = d3.select("body")
-      .append("div")
-      .attr("class", "actorName")
-      .style("opacity", 0);
 
     const svg = d3.create("svg")
       .attr("viewBox", [0, 0, width, height])
@@ -106,6 +94,18 @@ export class GraphVisualization extends Component {
       .join("line")
       .attr("stroke-width", data => Math.sqrt(data.value));
 
+    const simulation = d3.forceSimulation(objectNodes)
+      .force("link", d3.forceLink().links(links).id(data => {return data.index}).distance(200))
+      .force("charge", d3.forceManyBody())
+      .force("center", d3.forceCenter(width/2, height/2));
+
+    const svgNodes = svg.append("g")
+      .selectAll("circle")
+      .data(objectNodes)
+      .enter()
+      .append("g")
+      .call(this.getDrag(simulation));
+
     const color = (node) => {
       switch(node.group) {
         case 1:
@@ -126,48 +126,42 @@ export class GraphVisualization extends Component {
       }
     }
 
-    const simulation = d3.forceSimulation(objectNodes)
-      .force("link", d3.forceLink().links(links).id(data => {return data.index}).distance(200))
-      .force("charge", d3.forceManyBody())
-      .force("center", d3.forceCenter(width/2, height/2));
-
-    const svgNodes = svg.append("g")
+    svgNodes.append("circle")
       .attr("stroke", "#fff")
       .attr("stroke-width", 1.5)
-      .selectAll("circle")
-      .data(objectNodes)
-      .join("circle")
       .attr("r", radius)
-      .attr("fill", color)
-      .call(this.getDrag(simulation))
-      /*.on("mouseover", this.handleOnMouseover)
-      .on("mousemove", this.handleOnMousemove)
-      .on("mouseout", this.handleOnMouseout)*/
-      .on("mouseover", (node) => {
+      .style("fill", color)
+      .on("mouseover", function(node) {
         if(node.group === 2) {
-          actorName.transition()
+          d3.select(this.parentNode).selectAll(".actorName")
+            .transition()
             .duration(100)
-            .style("opacity", 0.9);
-          actorName.html(node.name)
-            .style("left", d3.event.pageX + "px")
-            .style("top", d3.event.pageY + "px");
+            .attr("fill-opacity", 0.85);
         }
       })
-      .on("mousemove", (node) => {
+      .on("mouseout", function(node) {
         if(node.group === 2) {
-          actorName.html(node.name)
-            .style("left", (d3.event.pageX + 15) + "px")
-            .style("top", d3.event.pageY + "px")
-            .style("opacity", 0.9);
-        }
-      })
-      .on("mouseout", (node) => {
-        if(node.group === 2) {
-          actorName.transition()
-            .duration(100)  
-            .style("opacity", 0);
+          d3.select(this.parentNode).selectAll(".actorName")
+            .transition()
+            .duration(100)
+            .attr("fill-opacity", 0);
         }
       });
+
+    const name = (node) => {
+      if(node.group === 2) {
+        return node.name;
+      }
+      return;
+    }
+
+    svgNodes.append("text")
+      .attr("class", "actorName")
+      .attr("pointer-events", "none")
+      .attr("font-size", "1.5rem")
+      .attr("fill", "black")
+      .attr("fill-opacity", 0)
+      .text(name);
 
     simulation.on("tick", () => {
       svgLinks
@@ -176,34 +170,17 @@ export class GraphVisualization extends Component {
         .attr("x2", data => data.target.x)
         .attr("y2", data => data.target.y);
 
-      svgNodes
+      svgNodes.selectAll("circle")
         .attr("cx", data => data.x)
         .attr("cy", data => data.y);
+
+      svgNodes.selectAll("text")
+        .attr("x", data => data.x + 10)
+        .attr("y", data => data.y - 40);
     });
 
     return svg.node();
   }
-
-  /*handleOnMouseover = (node) => {
-    this.setState({
-      isHoveringOverActor: true,
-      targetActorNode: node
-    });
-  }
-
-  handleOnMousemove = (node) => {
-    this.setState({
-      isHoveringOverActor: true,
-      targetActorNode: node
-    });
-  }
-
-  handleOnMouseout = (node) => {
-    this.setState({
-      isHoveringOverActor: false,
-      targetActorNode: null
-    });
-  }*/
 
   render() {
     return (
@@ -216,8 +193,6 @@ export class GraphVisualization extends Component {
         <div className="graphVisualization">
           <div id="graphSvg" className="graphSvg"></div>
         </div>
-
-        {/*this.getActorName()*/}
 
       </div>
     );
