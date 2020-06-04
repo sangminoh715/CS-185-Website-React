@@ -1,0 +1,38 @@
+.graphVisualizationContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  background-color: #111111E6; /* A = 0xE6 => ~ 90% opacity */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 9999; 
+}
+
+.graphVisualization {
+  display: inline-block;
+  position: relative;
+
+  width: 90%;
+  max-width: 90vw;
+  height: 90%;
+  max-height: 50.625vw;
+  overflow: hidden;
+
+  background-color: #FFFFFF;
+  border-radius: 0.2rem;
+
+  z-index: 10000;
+}
+
+.graphSvg {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
