@@ -9,10 +9,29 @@ export class GraphVisualization extends Component {
   constructor() {
     super();
 
+    this.state = {
+      isHoveringOverActor: false,
+      targetActorNode: null
+    };
+
     this.data = {
       nodes: [],
       links: []
     };
+  }
+
+  getActorName = () => {
+    return (
+      <div className="actorName" 
+        style={{
+          opacity: (this.state.isHoveringOverActor && this.state.targetActorNode.group === 2) ? 0.85 : 0,
+          left: (d3.event.pageX + 15) + "px",
+          top: d3.event.pageY + "px"
+        }} >
+
+        {this.state.targetActorNode.name}
+      </div>
+    );
   }
 
   getDrag = (simulation) => {
@@ -27,6 +46,12 @@ export class GraphVisualization extends Component {
     const onDrag = (data) => {
       data.fx = d3.event.x;
       data.fy = d3.event.y;
+
+      /*if(data.group === 2) {
+        this.actorName.style("opacity", 0.9)
+          .style("left", (d3.event.pageX + 15) + "px")
+          .style("top", d3.event.pageY + "px");
+      }*/
     }
 
     const onDragEnd = (data) => {
@@ -49,21 +74,28 @@ export class GraphVisualization extends Component {
     const objectNodes = nodes.map(data => Object.create(data));
     const objectLinks = links.map(data => Object.create(data));
 
+    var actorName = d3.select("body")
+      .append("div")
+      .attr("class", "actorName")
+      .style("opacity", 0);
+
     const svg = d3.create("svg")
       .attr("viewBox", [0, 0, width, height])
       .attr("preserveAspectRatio", "xMinYMin meet");
 
     var defs = svg.append("defs");
-    nodes.forEach((movie) => {
-      defs.append("pattern")
-        .attr("id", "poster" + movie.id)
-        .attr("width", 1)
-        .attr("height", 1)
-        .append("svg:image")
-        .attr("xlink:href", movie.poster)
-        .attr("width", 300)
-        .attr("height", 300)
-        .attr("x", -50);
+    nodes.forEach((node) => {
+      if(node.group === 1) {
+        defs.append("pattern")
+          .attr("id", "poster" + node.id)
+          .attr("width", 1)
+          .attr("height", 1)
+          .append("svg:image")
+          .attr("xlink:href", node.poster)
+          .attr("width", 300)
+          .attr("height", 300)
+          .attr("x", -50);  
+      }
     });
 
     const svgLinks = svg.append("g")
@@ -107,7 +139,35 @@ export class GraphVisualization extends Component {
       .join("circle")
       .attr("r", radius)
       .attr("fill", color)
-      .call(this.getDrag(simulation));
+      .call(this.getDrag(simulation))
+      /*.on("mouseover", this.handleOnMouseover)
+      .on("mousemove", this.handleOnMousemove)
+      .on("mouseout", this.handleOnMouseout)*/
+      .on("mouseover", (node) => {
+        if(node.group === 2) {
+          actorName.transition()
+            .duration(100)
+            .style("opacity", 0.9);
+          actorName.html(node.name)
+            .style("left", d3.event.pageX + "px")
+            .style("top", d3.event.pageY + "px");
+        }
+      })
+      .on("mousemove", (node) => {
+        if(node.group === 2) {
+          actorName.html(node.name)
+            .style("left", (d3.event.pageX + 15) + "px")
+            .style("top", d3.event.pageY + "px")
+            .style("opacity", 0.9);
+        }
+      })
+      .on("mouseout", (node) => {
+        if(node.group === 2) {
+          actorName.transition()
+            .duration(100)  
+            .style("opacity", 0);
+        }
+      });
 
     simulation.on("tick", () => {
       svgLinks
@@ -124,6 +184,27 @@ export class GraphVisualization extends Component {
     return svg.node();
   }
 
+  /*handleOnMouseover = (node) => {
+    this.setState({
+      isHoveringOverActor: true,
+      targetActorNode: node
+    });
+  }
+
+  handleOnMousemove = (node) => {
+    this.setState({
+      isHoveringOverActor: true,
+      targetActorNode: node
+    });
+  }
+
+  handleOnMouseout = (node) => {
+    this.setState({
+      isHoveringOverActor: false,
+      targetActorNode: null
+    });
+  }*/
+
   render() {
     return (
       <div className="graphVisualizationContainer" onClick={(event) => {
@@ -135,6 +216,8 @@ export class GraphVisualization extends Component {
         <div className="graphVisualization">
           <div id="graphSvg" className="graphSvg"></div>
         </div>
+
+        {/*this.getActorName()*/}
 
       </div>
     );
@@ -167,8 +250,6 @@ export class GraphVisualization extends Component {
 
     this.data.nodes.push(...movieNodes);
     this.data.nodes.push(...actorNodes);
-
-    console.log(this.data.nodes)
 
     movieNodes.forEach((movie, index) => {
       movie.actors.forEach((actor) => {

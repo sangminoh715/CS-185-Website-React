@@ -19,7 +19,7 @@
   position: relative;
 
   width: 90%;
-  max-width: 90 vw;
+  max-width: 90vw;
   height: 90%;
   max-height: 50.625vw;
   overflow: hidden;
@@ -35,4 +35,19 @@
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.actorName {
+  position: absolute;
+
+  font-size: 0.875rem;
+  text-align: center;
+
+  padding: 0.25rem 0.5rem;
+  
+  background-color: #FFFFFF;
+  border: 1px solid #E0E0E0;
+  border-radius: 0.2rem;
+
+  z-index: 10001;
 }
